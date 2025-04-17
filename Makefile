@@ -18,7 +18,7 @@ clean  :; forge clean
 # Remove modules
 remove :; rm -rf .gitmodules && rm -rf .git/modules/* && rm -rf lib && touch .gitmodules && git add . && git commit -m "modules"
 
-install :; forge install cyfrin/foundry-devops@0.2.2 --no-commit && forge install foundry-rs/forge-std@v1.8.2 --no-commit && forge install axelarnetwork/axelar-gmp-sdk-solidity --no-commit
+install :; forge install foundry-rs/forge-std@v1.8.2 --no-commit && forge install axelarnetwork/axelar-gmp-sdk-solidity@v6.0.6 --no-commit
 
 # Update Dependencies
 update:; forge update
