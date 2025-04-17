@@ -107,3 +107,30 @@ BASESCAN_API_KEY=PGT7PITX87XSC9E6R7WGHR21H42K5A3XWE
 else ifeq ($(findstring --network baseSepolia,$(ARGS)),--network baseSepolia)
 	NETWORK_ARGS := --rpc-url $(BASE_SEPOLIA_RPC_URL) --account $(ACCOUNT) --broadcast --verify --chain-id 84532 --etherscan-api-key $(BASESCAN_API_KEY) -vvvv
 ```
+
+### Cross Chain Function Call Example
+
+Making a cross chain function call from Avalanche Fuji to Ethereum Sepolia network.
+
+Calling the following function of a contract deployed on Sepolia: https://sepolia.etherscan.io/address/0x147397c3d483bbe8f3544df4c5d0486fc0bb8432
+
+**Function**: store(uint256 num)
+
+**messageType should always be 1**
+
+**How to find chain name?**
+Use the following links to find the relevant chain name.
+
+Mainnet: https://docs.axelar.dev/resources/contract-addresses/testnet/
+
+Testnet: https://docs.axelar.dev/resources/contract-addresses/testnet/
+
+**How to generate encoded function parameters?**
+
+In Remix console, use the following command:
+
+```bash
+web3.eth.abi.encodeParameters(["uint256"], ["10"])
+```
+
+![Alt Text](images/sample-call.png)
