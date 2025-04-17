@@ -100,3 +100,10 @@ else if (block.chainid == 84532) {
 BASE_SEPOLIA_RPC_URL=
 BASESCAN_API_KEY=PGT7PITX87XSC9E6R7WGHR21H42K5A3XWE
 ```
+
+4. Add chain specific deploy command in Makefile in the deploy recipe, for eg:
+
+```bash
+else ifeq ($(findstring --network baseSepolia,$(ARGS)),--network baseSepolia)
+	NETWORK_ARGS := --rpc-url $(BASE_SEPOLIA_RPC_URL) --account $(ACCOUNT) --broadcast --verify --chain-id 84532 --etherscan-api-key $(BASESCAN_API_KEY) -vvvv
+```
