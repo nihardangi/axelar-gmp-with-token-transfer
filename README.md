@@ -90,7 +90,8 @@ Example: If you want to enable base-sepolia network,
 
 ```solidity
 else if (block.chainid == 84532) {
-            activeNetworkConfig = getBaseSepoliaConfig();
+    activeNetworkConfig = getBaseSepoliaConfig();
+}
 ```
 
 3. And add the relevant keys to .env file, for eg:
