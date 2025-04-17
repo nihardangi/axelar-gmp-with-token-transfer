@@ -5,7 +5,6 @@ libs = ["lib"]
 
 remappings = [
     '@axelar-network/contracts/=lib/axelar-gmp-sdk-solidity/contracts/',
-    '@openzeppelin=lib/openzeppelin-contracts/',
 ]
 
 # See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
