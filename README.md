@@ -1,66 +1,101 @@
-## Foundry
+## Cross Chain Function Calls using Axelar
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+This repository showcases the capability of making cross chain function calls using Axelar GMP.
 
-Foundry consists of:
+Along with the above functionality, the following functionalities have also been implemented:
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+- Cross chain message sending
+- Cross chain token transfer
 
-## Documentation
+## Axelar Documentation
 
-https://book.getfoundry.sh/
+https://docs.axelar.dev/dev/general-message-passing/overview/
 
-## Usage
+## Installation
+
+1. Clone the repository
+
+```bash
+git clone git@github.com:nihardangi/axelar-gmp-with-token-transfer.git
+```
+
+2. Navigate into the project directory
+
+```bash
+cd axelar-gmp-with-token-transfer
+```
+
+3. Install the project dependencies
+
+```bash
+make install
+```
+
+4. Initialize .env file with following keys and assign proper values.
+
+```
+ACCOUNT=
+RPC_URL=
+SEPOLIA_RPC_URL=
+FUJI_RPC_URL=
+BASE_SEPOLIA_RPC_URL=
+ETHERSCAN_API_KEY=
+SNOWTRACE_API_KEY=
+BASESCAN_API_KEY=
+```
 
 ### Build
 
-```shell
-$ forge build
-```
-
-### Test
-
-```shell
-$ forge test
-```
-
-### Format
-
-```shell
-$ forge fmt
-```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
+```bash
+$ make build
 ```
 
 ### Deploy
 
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
+**Sepolia:**
+
+```bash
+make deploy ARGS="--network sepolia"
 ```
 
-### Cast
+**Avalanche Fuji:**
 
-```shell
-$ cast <subcommand>
+```bash
+make deploy ARGS="--network fuji"
 ```
 
-### Help
+New networks can be added by adding the network specific config function in HelperConfig.s.sol file.
 
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
+Axelar Gateway and Axelar Gas Service addresses can be found here:
+
+**Mainnet**: https://docs.axelar.dev/resources/contract-addresses/testnet/
+
+**Testnet**: https://docs.axelar.dev/resources/contract-addresses/testnet/
+
+Example: If you want to enable base-sepolia network,
+
+1. Add the following function in HelperConfig.s.sol file:
+
+```solidity
+    function getBaseSepoliaConfig() public pure returns (NetworkConfig memory) {
+        return NetworkConfig({
+            axelarGateway: 0xe432150cce91c13a887f7D836923d5597adD8E31,
+            axelarGasService: 0xbE406F0189A0B4cf3A05C286473D23791Dd44Cc6,
+            account: <YOUR_PUBLIC_KEY>
+        });
+    }
+```
+
+2. Add the following condition in HelperConfig.s.sol constructor's if-else block.
+
+```solidity
+else if (block.chainid == 84532) {
+            activeNetworkConfig = getBaseSepoliaConfig();
+```
+
+3. And add the relevant keys to .env file, for eg:
+
+```
+BASE_SEPOLIA_RPC_URL=
+BASESCAN_API_KEY=PGT7PITX87XSC9E6R7WGHR21H42K5A3XWE
 ```
