@@ -127,10 +127,16 @@ Testnet: https://docs.axelar.dev/resources/contract-addresses/testnet/
 
 **How to generate encoded function parameters?**
 
-In Remix console, use the following command:
+In Remix console, use the following command (Replace types and values depending on the function):
 
 ```bash
 web3.eth.abi.encodeParameters(["uint256"], ["10"])
+```
+
+You'll get an output like this:
+
+```bash
+0x000000000000000000000000000000000000000000000000000000000000000a
 ```
 
 ![Alt Text](images/sample-call.png)
