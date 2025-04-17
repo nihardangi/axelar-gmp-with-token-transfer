@@ -44,6 +44,12 @@ SNOWTRACE_API_KEY=
 BASESCAN_API_KEY=
 ```
 
+5. Run the following command in present working directory:
+
+```
+source .env
+```
+
 ### Build
 
 ```bash
